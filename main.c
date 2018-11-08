@@ -1,5 +1,6 @@
 #include "stm32l476xx.h"
 #include "UsartHandler.h"
+char input;
 uint8_t output;
 uint8_t buffer[10];
 
@@ -11,16 +12,25 @@ uint8_t lowerToUpper()
 
 void USART2_IRQHandler(void)
 {
-UsartRead(buffer);
+UsartRead();
 output = lowerToUpper();
-UsartWrite(&output);
+UsartWrite(output);
 }
 
 
 int main(void){
+RCC->AHB2ENR |= RCCAHB2ENR_GPIODEN;// PD5 PD6
+GPIOD->MODER &= ~;//clear bits
+GPIOD->MODER |= ;//set to alt function
+GPIOD->AFR[0] |= ;// set the pins to right alt function
+GPIOD->OSPEEDER |= ;// set to fast?
+GPIOD->PUPDR &= ~ ;//clear bits
+GPIOD->PUPDR |= ;//select pull up
+GPIOD->OTYPER &= ~;// set to push pull?
 UsartInit();
 
 	while(1)
 	{
+
 	}
 }
