@@ -383,29 +383,9 @@
           <GroupName>Source Group 1</GroupName>
           <Files>
             <File>
-              <FileName>PiezoBuzzer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\PiezoBuzzer.c</FilePath>
-            </File>
-            <File>
-              <FileName>PiezoBuzzer.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\PiezoBuzzer.h</FilePath>
-            </File>
-            <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\main.c</FilePath>
-            </File>
-            <File>
-              <FileName>waveGenerator.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\waveGenerator.c</FilePath>
-            </File>
-            <File>
-              <FileName>waveGenerator.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\waveGenerator.h</FilePath>
             </File>
             <File>
               <FileName>stm32l476xx.h</FileName>
@@ -413,14 +393,14 @@
               <FilePath>.\stm32l476xx.h</FilePath>
             </File>
             <File>
-              <FileName>readDAC.c</FileName>
+              <FileName>UsartHandler.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\readDAC.c</FilePath>
+              <FilePath>.\UsartHandler.c</FilePath>
             </File>
             <File>
-              <FileName>readDAC.h</FileName>
+              <FileName>UsartHandler.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\readDAC.h</FilePath>
+              <FilePath>.\UsartHandler.h</FilePath>
             </File>
           </Files>
         </Group>

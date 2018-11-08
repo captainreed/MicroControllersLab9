@@ -1,4 +1,5 @@
 #include "UsartHandler.h"
+#include "stm32l476xx.h"
 
 void UsartInit()
 {
@@ -37,12 +38,12 @@ void UsartInit()
 	
 }
 
-void UsartWrite(char* letter)
+void UsartWrite(uint8_t *letter)
 {
 	
 }
 
-void UsartRead()
+void UsartRead(uint8_t *thebuffer)
 {
 	
 	

@@ -1,6 +1,5 @@
 #include "stm32l476xx.h"
 #include "UsartHandler.h"
-char input;
 uint8_t output;
 uint8_t buffer[10];
 
@@ -12,9 +11,9 @@ uint8_t lowerToUpper()
 
 void USART2_IRQHandler(void)
 {
-UsartRead();
+UsartRead(buffer);
 output = lowerToUpper();
-UsartWrite(output);
+UsartWrite(&output);
 }
 
 
@@ -23,6 +22,5 @@ UsartInit();
 
 	while(1)
 	{
-
 	}
 }
