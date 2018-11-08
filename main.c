@@ -1,5 +1,6 @@
 #include "stm32l476xx.h"
 #include "UsartHandler.h"
+#include "LCD.h"
 char input;
 uint8_t output;
 uint8_t buffer;
@@ -14,6 +15,7 @@ void USART2_IRQHandler(void)
 {
 buffer = UsartRead();
 output = lowerToUpper(buffer);
+LCD_DisplayString((uint8_t*) "O");
 UsartWrite(output);
 }
 
@@ -28,12 +30,14 @@ GPIOD->PUPDR &= ~(GPIO_PUPDR_PUPDR5_0 | GPIO_PUPDR_PUPDR5_1 | GPIO_PUPDR_PUPDR6_
 GPIOD->PUPDR |= (GPIO_PUPDR_PUPDR5_0 | GPIO_PUPDR_PUPDR6_0);//select pull up
 GPIOD->OTYPER &= ~(GPIO_OTYPER_OT_5 | GPIO_OTYPER_OT_6);// set to push pull?
 RCC->APB1ENR1 |= RCC_APB1ENR1_USART2EN;
-RCC->CCIPR &= ~RCC_CCIPR_USART2_sel;
+RCC->CCIPR &= ~RCC_CCIPR_USART2SEL;
 RCC->CCIPR |= RCC_CCIPR_USART2SEL_0;
 UsartInit();
-
+LCD_Initialization();
+LCD_DisplayString((uint8_t*) "test");
 	while(1)
 	{
-
+		UsartWrite((uint8_t)'M');
+		LCD_DisplayString((uint8_t*) "W");
 	}
 }
