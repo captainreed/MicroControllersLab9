@@ -4,6 +4,6 @@
 
 void UsartInit();
 void UsartWrite(uint8_t letter);
-void UsartRead(uint8_t thebuffer);
+uint8_t UsartRead();
 
 #endif

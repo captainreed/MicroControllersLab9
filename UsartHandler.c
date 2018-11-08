@@ -1,6 +1,8 @@
 #include "UsartHandler.h"
 #include "stm32l476xx.h"
 
+uint8_t inputbuffer;
+
 void UsartInit()
 {
 USART2->CR1 &= ~USART_CR1_UE; // dissable usart
@@ -23,9 +25,17 @@ while ((USART2->ISR & USART_ISR_REACK) == 0)
 
 void UsartWrite(uint8_t letter)
 {
+	while(!(USART2->ISR & USART_ISR_TXE));//wait for the transmission empty flag
+	USART2->TDR = letter & 0xFF;
+
+	while(!(USART2->ISR & USART_ISR_TC));//wait until the input status register is cleared
+	USART2->ICR |= USART_ICR_TCCF;
 	
 }
-void UsartRead(uint8_t input)
+
+uint8_t UsartRead()
 {
-	
+	while(!(USART2->ISR & USART_ISR_RXNE));
+	inputbuffer = USART2->RDR;
+	return inputbuffer;
 }

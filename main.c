@@ -4,16 +4,16 @@ char input;
 uint8_t output;
 uint8_t buffer;
 
-uint8_t lowerToUpper()
+uint8_t lowerToUpper(uint8_t charIn)
 {
-	return buffer - 32;//the hex value of 23 is 0x20
+	return charIn - 32;//the hex value of 23 is 0x20
 }
 
 
 void USART2_IRQHandler(void)
 {
-UsartRead(&buffer);
-output = lowerToUpper();
+buffer = UsartRead();
+output = lowerToUpper(buffer);
 UsartWrite(output);
 NVIC_ClearPendingIRQ(USART2_IRQn);
 }
