@@ -1,59 +1,28 @@
-#include "PiezoBuzzer.h"
 #include "stm32l476xx.h"
-#include "waveGenerator.h"
+#include "UsartHandler.h"
+char input;
+uint8_t output;
+uint8_t buffer[10];
 
-//new files:
-//readADC.c
-//waveGenerator.c this is where the interrupts will be initiated
-
-void TIM2_IRQHandler()
+uint8_t lowerToUpper()
 {
-NVIC_ClearPendingIRQ(TIM2_IRQn);// clear the pending flag every time the function is used
+	return buffer[0] - 32;//the hex value of 23 is 0x20
 }
-//interupt 1
-/*
-configure to be triggered every 500 ms
-find average of ADC array
-adcValue = average of the array
-newFreq = math.floor(100 + 900*(adcValue/maxADCValue))
-clear the array
-call setFreq(newFreq)
 
-*/
-void TIM3_IRQHandler()
+
+void USART2_IRQHandler(void)
 {
-NVIC_ClearPendingIRQ(TIM3_IRQn);// clear the pending flag every time the function is used
-
+UsartRead();
+output = lowerToUpper();
+UsartWrite(output);
 }
-//interupt 2
-/*
-set the interupt to be triggered every 2 ms
-
-read the ADC
-store ADC value in array
-*/
-
-void TIM4_IRQHandler()
-{
-NVIC_ClearPendingIRQ(TIM4_IRQn);// clear the pending flag every time the function is used
-
-}
-//interupt 3
-/*
-set the new output value for the DAC
-*/
 
 
 int main(void){
-	
-	initBuzzer();
-	configInterupts();
+UsartInit();
 
 	while(1)
 	{
 
 	}
-	
-	
-	
 }
