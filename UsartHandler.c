@@ -10,9 +10,11 @@ USART2->CR1 &= ~USART_CR1_M; // set to be 8 bit message
 USART2->CR2 &= ~USART_CR2_STOP; //set to be 1 stop bit
 USART2->CR1 &= ~USART_CR1_PCE; //set parity
 USART2->CR1 &= ~USART_CR1_OVER8; // set oversampling
-USART2->BRR =  0x208D; // set baud rate
+USART2->BRR =  417; // set baud rate
 USART2->CR1 |= (USART_CR1_TE | USART_CR1_RE);//enable transmission and reception
 USART2->CR1 |= USART_CR1_UE;//enable usart
+NVIC_EnableIRQ(USART2_IRQn);
+USART2->CR1 |= USART_CR1_RXNEIE;
 while ((USART2->ISR & USART_ISR_TEACK) == 0)
 	{
 		
@@ -35,7 +37,8 @@ void UsartWrite(uint8_t letter)
 
 uint8_t UsartRead()
 {
-	while(!(USART2->ISR & USART_ISR_RXNE));
+	while(!(USART2->ISR & USART_ISR_RXNE));//is not exiting this loop
 	inputbuffer = USART2->RDR;
+	
 	return inputbuffer;
 }
