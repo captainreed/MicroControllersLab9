@@ -7,7 +7,14 @@ uint8_t buffer;
 
 uint8_t lowerToUpper(uint8_t charIn)
 {
+	if(charIn > 96 && charIn < 123)
+	{
 	return charIn - 32;//the hex value of 23 is 0x20
+	}
+	else
+	{
+		return 0;
+	}
 }
 
 
@@ -17,6 +24,7 @@ buffer = UsartRead();
 output = lowerToUpper(buffer);
 LCD_DisplayString((uint8_t*) "O");
 UsartWrite(output);
+NVIC_ClearPendingIRQ(USART2_IRQn);//need to clear the interrupt flag here
 }
 
 
@@ -38,7 +46,10 @@ UsartInit();
 LCD_DisplayString((uint8_t*) "test");
 	while(1)
 	{
-		UsartWrite((uint8_t)'M');
-		LCD_DisplayString((uint8_t*) "W");
+		//LCD_DisplayString((uint8_t*) "N");
+		//UsartWrite((uint8_t)'M');
+		//UsartWrite((uint8_t)'A');//this line was for testing masking of usartwrite
+		//UsartRead();
+		//LCD_DisplayString((uint8_t*) "W");
 	}
 }
